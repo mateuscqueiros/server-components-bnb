@@ -1,16 +1,12 @@
-import { axios } from '../lib/axios';
+import { internalAxios } from '../lib/axios';
 
 export default async function Home() {
-  const users = await axios
-    .get('/users')
-    .then((response) => response.data.users);
+  const users = await internalAxios.get('/api/users').then((res) => res.data);
 
   return (
     <>
-      <div>Esse aqui é o conteúdo da Home</div>
-      {users.map((user: any) => (
-        <p key={user.id}>{user.firstName}</p>
-      ))}
+      Página inicial
+      {users && users.map((user: any) => <p key={user.id}>{user.firstName}</p>)}
     </>
   );
 }
